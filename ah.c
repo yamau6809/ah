@@ -88,9 +88,9 @@ void ah(FILE *infp, char *fname)
   }
   i = a = 0;
   if (oflag)
-    sprintf(p, "%07o ", i + seek);
+    sprintf(p, "%07lo ", i + seek);
   else
-    sprintf(p, "%07x ", i + seek);
+    sprintf(p, "%07lx ", i + seek);
   p += 8;
   while ((c = getc(infp)) != EOF) {
     i++;
@@ -115,9 +115,9 @@ void ah(FILE *infp, char *fname)
       p = v;
       a = 0;
       if (oflag)
-	sprintf(p, "%07o", i + seek);
+	sprintf(p, "%07lo", i + seek);
       else
-	sprintf(p, "%07x", i + seek);
+	sprintf(p, "%07lx", i + seek);
       p += 7;
     }
     if (i % 4 == 0) {

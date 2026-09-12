@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define YES 1
 #define NO  0
@@ -16,14 +17,21 @@ char vp[68];	/* previous contents of the output buffer */
 char s[19];	/* ascii portion of the output buffer */
 
 void ah(FILE *infp, char *fname);
+
+#ifdef USE_LOCAL_ATOL
 long atol(char *string);
+#endif
 
 int main(int argc, char **argv)
 {
-    FILE *infp, *fopen();
+    FILE *infp;
+#ifdef USE_LOCAL_FOPEN
+    FILE *fopen();
+#endif
     unsigned char c;
+#ifdef USE_LOCAL_ATOL
     long atol();
-
+#endif
     while (--argc && ((c = **++argv) == '+' || c == '-')) {
         if ((*argv)[0] == '+') {
             if ((*argv)[1] == EOS)
@@ -148,6 +156,7 @@ void ah(FILE *infp, char *fname)
         putchar('\n');
 }
 
+#ifdef USE_LOCAL_ATOL
 long atol(char *string)
 {
     long val = 0;
@@ -182,3 +191,4 @@ long atol(char *string)
     }
     return (val);
 }
+#endif
